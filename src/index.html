@@ -7,8 +7,119 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.js'></script>
+  
+
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.51.0/mapbox-gl.css' rel='stylesheet' />
+  
+   <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js"
+ integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
+ crossorigin=""></script>
+ <script src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js'></script>
+
 </head>
 <body>
+    
+    <div class="container">
+      <!-- <div class="row">
+        <div id='map' style='width: 800px; height: 600px;' class="col-sm"> </div>
+      </div>
+      <br>
+      <hr>
+      <br> -->
+      <div class="row">
+        <div id='mapid' style='width: 1800px; height: 900px;' class="col-sm"> </div>
+      </div>
+    </div>
+
+<!-- <script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibWFtamVyZXoiLCJhIjoiY2lqMnRuN3ZxMDAxdnVta3BuY2hoa3Y4byJ9.nw3FJ42_Qm-ZFZi-ja0bgg';
+const map = new mapboxgl.Map({
+container: 'map',
+style: 'mapbox://styles/mamjerez/cjpqju9h40n242rq9bvkpee47',
+center: [-6.114764, 36.684241],
+zoom: 13.6
+});
+</script> -->
+ 
+ <script>
+   var mymap = L.map('mapid', {
+     // La Lat y Log deben estar al reves que en Mapbox
+      // center: [36.68731461086896,-6.135306358337402],    
+      // zoom: 18
+
+      center: [36.69512622732945,-6.125478744506836],       
+      zoom: 13
+     // center: [36.769316564542,-6.0269378662109375],    // Incluido Jerez Rural Distritos 09 y 10
+      // zoom: 11 
+
+    });
+           
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+    attribution: 'Cartografia &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contribuyen, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagen © <a href="https://www.mapbox.com/">Mapbox</a>',
+    maxZoom:20,
+    id: 'mapbox.streets',
+    accessToken: 'pk.eyJ1IjoibWFtamVyZXoiLCJhIjoiY2lqMnRuN3ZxMDAxdnVta3BuY2hoa3Y4byJ9.nw3FJ42_Qm-ZFZi-ja0bgg'
+}).addTo(mymap); 
+
+// var marker = L.marker([36.684241, -6.114764]).addTo(mymap);
+
+// var circle = L.circle([36.68731461086896,-6.135306358337402], {
+//     color: 'red',
+//     fillColor: '#f03',
+//     fillOpacity: 0.5,
+//     radius: 500
+// }).addTo(mymap);
+
+// var latlngs =[[-6.136444,36.686954],[-6.135074,36.687044],[-6.136444,36.686954]];
+// var polygon = L.polygon(latlngs, {color: 'blue'}).addTo(mymap);
+
+Rosario = omnivore.geojson('/assets/Entorno-Rosario.geojson');
+Rosario.bindPopup("<b>Entorno</b><br>Calle Rosario.");
+Rosario.setStyle({
+  fillOpacity: 1,
+  color: 'red',
+  weight: 1
+});
+Rosario.addTo(mymap);
+
+// Rosario =  {
+//     color: 'red',
+//     fillColor: '#f03',
+//     fillOpacity: 0.5,
+//     radius: 500
+// };
+
+var Conservatorio = omnivore.geojson('/assets/Conservatorio.geojson').addTo(mymap);
+Conservatorio.bindPopup("Conservatorio de música.");
+
+// omnivore.kml('/assets/Distritos.kml').addTo(mymap);
+
+omnivore.geojson('/assets/Distrito01.json').addTo(mymap);
+omnivore.geojson('/assets/Distrito02.json').addTo(mymap);
+
+let D02_005 = omnivore.geojson('/assets/02-005.json').addTo(mymap);
+D02_005.bindPopup("Distrito 02.<br>Sección 005.");
+
+omnivore.geojson('/assets/Distrito03.json').addTo(mymap);
+omnivore.geojson('/assets/Distrito04.json').addTo(mymap);
+omnivore.geojson('/assets/Distrito05.json').addTo(mymap);
+omnivore.geojson('/assets/Distrito06.json').addTo(mymap);
+omnivore.geojson('/assets/Distrito07.json').addTo(mymap);
+omnivore.geojson('/assets/Distrito08.json').addTo(mymap);
+omnivore.geojson('/assets/Distrito09.json').addTo(mymap);
+omnivore.geojson('/assets/Distrito10.json').addTo(mymap);
+
+
+  </script>
+      
   <app-root></app-root>
+  <app-mapa></app-mapa>
 </body>
 </html>
