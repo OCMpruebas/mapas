@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import 'https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.3.1/leaflet-omnivore.min.js';
-
 
 declare let L: any;
 declare let omnivore: any;
-
 
 @Component({
   selector: 'app-mapa',
@@ -83,7 +80,5 @@ export class MapaComponent implements OnInit {
  omnivore.geojson('/assets/Distrito09.json').addTo(mymap);
  omnivore.geojson('/assets/Distrito10.json').addTo(mymap);
 
-
   }
-
 }
